@@ -75,22 +75,6 @@ class ApplicationForm(NetBoxModelForm):
 
 
 
-class PenTestForm(NetBoxModelForm):
-
-    class Meta:
-        model = models.PenTest
-        fields = [
-            'service',
-            'comments',
-            'status',
-            'date',
-            'ticket',
-            "report_link",
-        ]
-
-        widgets = {
-            'date': DatePicker(),
-        }
 
 class RelationForm(NetBoxModelForm):
 
