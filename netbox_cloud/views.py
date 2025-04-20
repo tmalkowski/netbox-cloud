@@ -126,37 +126,11 @@ class ServiceBulkEditView(generic.BulkEditView):
     table = tables.ServiceTable
     form = forms.ServiceBulkEditForm
 
-class ServiceBulkDeleteView(generic.BulkDeleteView):
-    queryset = models.Service.objects.all()
-    table = tables.ServiceTable
 
 class ServiceDeleteView(generic.ObjectDeleteView):
     queryset = models.Service.objects.all()
 
 
-class ICCreateView(generic.ObjectEditView):
-    queryset = models.IC.objects.all()
-    form = forms.ICForm
-
-    def alter_object(self, obj, request, url_args, url_kwargs):
-        if 'device' in request.POST:
-            try:
-                obj.assigned_object =  Device.objects.get(pk=request.POST['device'])
-            except (ValueError, Device.DoesNotExist):
-                pass
-
-        if 'virtual_machine' in request.POST:
-            try:
-                obj.assigned_object =  VirtualMachine.objects.get(pk=request.POST['virtual_machine'])
-            except (ValueError, Device.DoesNotExist):
-                pass
-        if 'application' in request.POST:
-            try:
-                obj.assigned_object =  models.Application.objects.get(pk=request.POST['application'])
-            except (ValueError, Device.DoesNotExist):
-                pass
-
-        return obj
 
 
 class RelationEditView(generic.ObjectEditView):
