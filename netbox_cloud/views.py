@@ -7,7 +7,6 @@ from . import tables
 class AzureSubscriptionListView(generic.ObjectListView):
     queryset = models.AzureSubscription.objects.all()
     table = tables.AzureSubscriptionTable
-    filterset = filtersets.ServiceFilterSet
 
 class AzureSubscriptionView(generic.ObjectView):
     queryset = models.AzureSubscription.objects.all()
@@ -15,7 +14,6 @@ class AzureSubscriptionView(generic.ObjectView):
 class AzureResourceGroupListView(generic.ObjectListView):
     queryset = models.AzureResourceGroup.objects.all()
     table = tables.AzureResourceGroupTable
-    filterset = filtersets.ServiceFilterSet
 
 class AzureResourceGroupView(generic.ObjectView):
     queryset = models.AzureResourceGroup.objects.all()
@@ -23,7 +21,6 @@ class AzureResourceGroupView(generic.ObjectView):
 class AzureVirtualNetworkListView(generic.ObjectListView):
     queryset = models.AzureVirtualNetwork.objects.all()
     table = tables.AzureVirtualNetworkTable
-    filterset = filtersets.ServiceFilterSet
 
 class AzureVirtualNetworkView(generic.ObjectView):
     queryset = models.AzureVirtualNetwork.objects.all()
@@ -31,107 +28,9 @@ class AzureVirtualNetworkView(generic.ObjectView):
 class AzureSubnetListView(generic.ObjectListView):
     queryset = models.AzureSubnet.objects.all()
     table = tables.AzureSubnetTable
-    filterset = filtersets.ServiceFilterSet
 
 class AzureSubnetView(generic.ObjectView):
     queryset = models.AzureSubnet.objects.all()
-
-from netbox.views import generic
-from tenancy.tables import TenantTable
-from virtualization.models import VirtualMachine
-from dcim.models import Device
-from dcim.tables import DeviceTable
-from virtualization.tables import VirtualMachineTable
-from utilities.views import ViewTab, register_model_view
-
-
-
-
-class ServiceListView(generic.ObjectListView):
-    queryset = models.Service.objects.all()
-    table = tables.ServiceTable
-    filterset = filtersets.ServiceFilterSet
-    filterset_form = forms.ServiceFilterForm
-
-class ServiceView(generic.ObjectView):
-    queryset = models.Service.objects.all()
-
-    def get_extra_context(self, request, instance):
-        tenants_table = TenantTable(instance.clients.all())
-        vuln_table = tables.VulnTable(instance.pentest_reports.all())
-
-        data = {
-                "tenant_table" : tenants_table,
-                "vuln_table" : vuln_table,
-            }
-        return data
-
-@register_model_view(models.Service, name='IC')
-class ServiceICView(generic.ObjectChildrenView):
-    queryset = models.Service.objects.all()
-    table = tables.ICTable
-    template_name = "netbox_cloud/service_IC_view.html"
-    tab = ViewTab(label='IC', badge=lambda obj: obj.config_itens.all().count(), hide_if_empty=True)
-
-    def get_children(self, request, parent):
-            childrens = parent.config_itens.all()
-            return childrens
-
-
-
-@register_model_view(models.Service, name='Relationships')
-class ServiceRelationView(generic.ObjectChildrenView):
-    queryset = models.Service.objects.all()
-    child_model = models.Relation
-    table = tables.RelationTable
-    template_name = "netbox_cloud/service_Relation_view.html"
-    tab = ViewTab(label='Relationships', badge=lambda obj: obj.relationships.all().count(), hide_if_empty=True)
-
-    def get_children(self, request, parent):
-            childrens = parent.relationships.all()
-            return childrens
-
-    def get_extra_context(self, request, instance):
-        relations = tables.RelationTable(instance.relationships.all())
-        data = {
-                "table" : relations,
-            }
-        return data
-
-@register_model_view(models.Service, name='Diagram')
-class ServiceDiagramView(generic.ObjectChildrenView):
-    queryset = models.Service.objects.all()
-    child_model = models.Service
-    table = tables.ServiceTable
-    template_name = "netbox_cloud/service_diagram_view.html"
-    tab = ViewTab(label='Diagram')
-
-    def get_children(self, request, parent):
-            childrens = parent.relationships.all()
-            return childrens
-
-class ServiceEditView(generic.ObjectEditView):
-    queryset = models.Service.objects.all()
-    form  = forms.ServiceForm
-
-
-class ServiceImportView(generic.BulkImportView):
-    queryset = models.Service.objects.all()
-    model_form = forms.ServiceImportForm
-    table = tables.ServiceTable
-
-class ServiceBulkEditView(generic.BulkEditView):
-    queryset = models.Service.objects.all()
-    filterset = filtersets.ServiceFilterSet
-    table = tables.ServiceTable
-    form = forms.ServiceBulkEditForm
-
-
-class ServiceDeleteView(generic.ObjectDeleteView):
-    queryset = models.Service.objects.all()
-
-
-
 
 class RelationEditView(generic.ObjectEditView):
     queryset = models.Relation.objects.all()
@@ -149,8 +48,6 @@ class RelationDeleteView(generic.ObjectDeleteView):
 
 class ICDeleteView(generic.ObjectDeleteView):
     queryset = models.IC.objects.all()
-
-
 
 class RelationListView(generic.ObjectListView):
     queryset = models.Relation.objects.all()

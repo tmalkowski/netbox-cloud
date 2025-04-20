@@ -45,24 +45,6 @@ class AzureSubnetForm(NetBoxModelForm):
         model = models.AzureSubnet
         fields = ['name', 'azure_id', 'virtual_network', 'prefix']
 
-class ServiceForm(NetBoxModelForm):
-
-    clients = DynamicModelMultipleChoiceField(label="Clients",
-        queryset=Tenant.objects.all(),
-        required=False,
-    )
-
-    backup_profile = forms.CharField(required=False)
-
-    class Meta:
-        model = models.Service
-        fields = [
-            "name",
-            "clients",
-            "comments",
-            "backup_profile",
-        ]
-
 class ApplicationForm(NetBoxModelForm):
 
     ports = NumericArrayField(
@@ -180,58 +162,5 @@ class RelationFilterForm(NetBoxModelFilterSetForm):
             "connector_shape",
             "link_text",
         ]
-
-
-class ServiceFilterForm(forms.ModelForm):
-
-    q = forms.CharField(
-        required=False,
-        label='Search'
-    )
-    clients = DynamicModelMultipleChoiceField(
-        label="Clients",
-        queryset=Tenant.objects.all(),
-        required=False,
-    )
-
-    class Meta:
-        model = models.Service
-        fields = [
-            'q',
-            'clients',
-        ]
-
-class ServiceBulkEditForm(NetBoxModelBulkEditForm):
-    model = models.Service
-
-    clients = DynamicModelMultipleChoiceField(
-        label="Clients",
-        queryset=Tenant.objects.all(),
-        required=False,
-    )
-    comments = forms.Textarea(
-        attrs={'class': 'font-monospace'}
-    )
-    backup_profile = forms.CharField(
-        required=False,
-    )
-
-    class Meta:
-        nullable_fields = ("clients", "comments", "backup_profile")
-
-class ServiceImportForm(NetBoxModelImportForm):
-    clients = CSVModelMultipleChoiceField(
-        label="Clients",
-        queryset=Tenant.objects.all(),
-        required=False,
-        to_field_name="name",
-        error_messages={
-            "invalid_choice": "Client name not found",
-        }
-    )
-
-    class Meta:
-        model = models.Service
-        fields = ["name", "clients", "comments", "backup_profile"]
 
 
