@@ -25,6 +25,26 @@ from netbox.forms import (
 
 from . import models
 
+class AzureSubscriptionForm(NetBoxModelForm):
+    class Meta:
+        model = models.AzureSubscription
+        fields = ['name', 'azure_id', 'managed_by']
+
+class AzureResourceGroupForm(NetBoxModelForm):
+    class Meta:
+        model = models.AzureResourceGroup
+        fields = ['name', 'azure_id', 'location']
+
+class AzureVirtualNetworkForm(NetBoxModelForm):
+    class Meta:
+        model = models.AzureVirtualNetwork
+        fields = ['name', 'azure_id', 'resource_group', 'location']
+
+class AzureSubnetForm(NetBoxModelForm):
+    class Meta:
+        model = models.AzureSubnet
+        fields = ['name', 'azure_id', 'virtual_network', 'prefix']
+
 class ServiceForm(NetBoxModelForm):
 
     clients = DynamicModelMultipleChoiceField(label="Clients",
