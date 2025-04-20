@@ -1,0 +1,2 @@
+recursive-include netbox_cloud/templates *.html
+recursive-include netbox_cloud/static *.js.*
