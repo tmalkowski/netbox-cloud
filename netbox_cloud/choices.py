@@ -25,9 +25,7 @@ class ShapeChoices(ChoiceSet):
     ROUND_EDGES = 1
     STADIUM = 2
     SUBROUTINE = 3
-    CYLINDRICAL = 4
     CIRCLE = 5
-    ASYMMETRIC = 6
     RHOMBUS = 7
     HEXAGON = 8
     PARALLELOGRAM = 9
@@ -37,9 +35,7 @@ class ShapeChoices(ChoiceSet):
         (ROUND_EDGES,  'Round Edges'),
         (STADIUM,  'Stadium Shaped'),
         (SUBROUTINE,  "Subroutine Shape"),
-        (CYLINDRICAL,  "Cylindrical Shape"),
         (CIRCLE,  "Circle Shape"),
-        (ASYMMETRIC, "asymmetric shape"),
         (RHOMBUS,"rhombus"),
         (HEXAGON,"Hexagon"),
         (PARALLELOGRAM ,"Parallelogram"),
