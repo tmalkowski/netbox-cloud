@@ -28,26 +28,6 @@ class AzureSubnetFilterSet(NetBoxModelFilterSet):
         model = models.AzureSubnet
         fields = ['name', 'azure_id', 'virtual_network', 'prefix']
 
-class ICFilter(django_filters.FilterSet):
-
-    q = django_filters.CharFilter(
-        method="search",
-        label="Search",
-    )
-
-    def search(self, queryset, name, value):
-        if not value.strip():
-            return queryset
-        ids = []
-        for ic in queryset:
-            if value in ic.name:
-                ids.append(ic.id)
-        return queryset.filter(id__in=ids)
-
-    class Meta:
-        model = models.IC
-
-        fields = []
 
 
 class RelationFilter(NetBoxModelFilterSet):
