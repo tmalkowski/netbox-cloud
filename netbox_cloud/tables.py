@@ -46,22 +46,6 @@ class AzureSubnetTable(NetBoxTable):
         model = models.AzureSubnet
         fields = ('name', 'azure_id', 'virtual_network', 'prefix')
 
-
-
-class ICTable(NetBoxTable):
-    id = ToggleColumn()
-    assigned_object = tables.LinkColumn(verbose_name="CI")
-    obj_type = tables.Column(verbose_name="Type")
-    actions = columns.ActionsColumn(actions=("delete",))
-    
-    class Meta(NetBoxTable.Meta):
-        model = models.IC        
-        fields = (
-            "id",
-            "assigned_object",
-            "obj_type"
-        )
-
 class VulnTable(NetBoxTable):
     id = ToggleColumn()
 

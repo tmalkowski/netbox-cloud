@@ -18,52 +18,6 @@ from netbox_cloud import models
 
 
 
-class ICSerializer(serializers.Serializer):
-
-    name = serializers.CharField(read_only=True)
-    display = serializers.SerializerMethodField("get_display")
-    service = serializers.CharField(source="service.name", required=False)
-
-    id = serializers.IntegerField(read_only=True)
-    service_id = serializers.IntegerField(
-        source="service.id",
-        required=True,
-    )
-
-    assigned_object_type = ContentTypeField(
-        queryset=ContentType.objects.filter(choices.OBJETO_ASSIGNMENT_MODELS),
-        required=True,
-        allow_null=True,
-    )
-    assigned_object = serializers.SerializerMethodField(read_only=True)
-
-    assigned_object_id = serializers.IntegerField(source="assigned_object.id", write_only=True)
-
-    def get_display(self, obj):
-        return obj.name
-
-    def get_assigned_object(self, obj):
-        if obj.assigned_object is None:
-            return None
-        serializer = get_serializer_for_model(obj.assigned_object)
-        context = {"request": self.context["request"]}
-        return serializer(obj.assigned_object, nested=True, context=context).data
-
-    class Meta:
-        model = models.IC
-        fields = [
-            "id",
-            "display",
-            "name",
-            "service",
-            "assigned_object_type",
-            "assigned_object",
-            "assigned_object_id",
-        ]
-
-
-
-
 class RelationSerializer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     service = serializers.SlugRelatedField(

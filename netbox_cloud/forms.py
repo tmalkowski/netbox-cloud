@@ -3,7 +3,6 @@ from django import forms
 from dcim.models import Device
 from circuits.models import Circuit, Provider
 from tenancy.models import Tenant
-from ipam.constants import SERVICE_PORT_MIN, SERVICE_PORT_MAX
 from virtualization.models import VirtualMachine
 from utilities.forms.fields import (
     DynamicModelMultipleChoiceField,
@@ -45,13 +44,6 @@ class AzureSubnetForm(NetBoxModelForm):
 
 class ApplicationForm(NetBoxModelForm):
 
-    ports = NumericArrayField(
-        label="Ports",
-        base_field=forms.IntegerField(
-            min_value=SERVICE_PORT_MIN,
-            max_value=SERVICE_PORT_MAX
-        ),
-    )
     devices = DynamicModelMultipleChoiceField(label="Devices",
         queryset=Device.objects.all(),
         required=False,

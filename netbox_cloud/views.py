@@ -46,9 +46,6 @@ class PenTestDeleteView(generic.ObjectDeleteView):
 class RelationDeleteView(generic.ObjectDeleteView):
     queryset = models.Relation.objects.all()
 
-class ICDeleteView(generic.ObjectDeleteView):
-    queryset = models.IC.objects.all()
-
 class RelationListView(generic.ObjectListView):
     queryset = models.Relation.objects.all()
     table = tables.RelationTable
