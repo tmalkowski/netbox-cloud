@@ -32,25 +32,3 @@ class AzureSubnetListView(generic.ObjectListView):
 class AzureSubnetView(generic.ObjectView):
     queryset = models.AzureSubnet.objects.all()
 
-class RelationEditView(generic.ObjectEditView):
-    queryset = models.Relation.objects.all()
-    form = forms.RelationForm
-
-class PenTestEditView(generic.ObjectEditView):
-    queryset = models.PenTest.objects.all()
-    form = forms.PenTestForm
-
-class PenTestDeleteView(generic.ObjectDeleteView):
-    queryset = models.PenTest.objects.all()
-
-class RelationDeleteView(generic.ObjectDeleteView):
-    queryset = models.Relation.objects.all()
-
-class RelationListView(generic.ObjectListView):
-    queryset = models.Relation.objects.all()
-    table = tables.RelationTable
-    filterset = filtersets.RelationFilter
-    filterset_form = forms.RelationFilterForm
-
-class RelationView(generic.ObjectView):
-    queryset = models.Relation.objects.all()

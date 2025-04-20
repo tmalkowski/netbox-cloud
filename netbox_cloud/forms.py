@@ -42,58 +42,5 @@ class AzureSubnetForm(NetBoxModelForm):
         model = models.AzureSubnet
         fields = ['name', 'azure_id', 'virtual_network', 'prefix']
 
-class ApplicationForm(NetBoxModelForm):
-
-    devices = DynamicModelMultipleChoiceField(label="Devices",
-        queryset=Device.objects.all(),
-        required=False,
-    )
-    vm = DynamicModelMultipleChoiceField(label="Virtual Machines",
-        queryset=VirtualMachine.objects.all(),
-        required=False,
-    )
-
-
-    class Meta:
-        model = models.Application
-        fields = [
-            "name",
-            "protocol",
-            "ports",
-            "version",
-            "devices",
-            "vm",
-        ]
-
-
-
-
-class RelationForm(NetBoxModelForm):
-
-    link_text = forms.CharField(required=False)
-
-    class Meta:
-        model = models.Relation
-        fields = [
-            'service',
-            'source_shape',
-            'destination_shape',
-            "connector_shape",
-            "link_text",
-        ]
-
-class RelationFilterForm(NetBoxModelFilterSetForm):
-    model = models.Relation
-
-    class Meta:
-        fields = [
-            'service',
-            'source',
-            'source_shape',
-            'destination',
-            'destination_shape',
-            "connector_shape",
-            "link_text",
-        ]
 
 

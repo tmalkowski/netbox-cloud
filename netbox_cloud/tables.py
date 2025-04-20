@@ -46,34 +46,3 @@ class AzureSubnetTable(NetBoxTable):
         model = models.AzureSubnet
         fields = ('name', 'azure_id', 'virtual_network', 'prefix')
 
-class VulnTable(NetBoxTable):
-    id = ToggleColumn()
-
-    class Meta(NetBoxTable.Meta):
-        model = models.PenTest        
-        fields = (
-            "id",
-            "ticket",
-            "date",
-            "status",
-        )
-
-        
-class RelationTable(NetBoxTable):
-    id = ToggleColumn()
-
-    service = tables.LinkColumn(verbose_name="Service")
-    source = tables.LinkColumn(verbose_name="Source")
-    destination = tables.LinkColumn(verbose_name="Destination")
-    
-    class Meta(NetBoxTable.Meta):
-        model = models.Relation
-        fields = [
-            "service",
-            "source",
-            "source_shape",
-            "destination",
-            "destination_shape",
-            "connector_shape",
-            "link_text",            
-        ]
