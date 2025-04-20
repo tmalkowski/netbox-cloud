@@ -37,3 +37,11 @@ class AzureSubnet(AzureResourceBase):
 
     def get_absolute_url(self):
         return reverse("plugins:netbox_cloud:azuresubnet", kwargs={"pk": self.pk})
+
+class Application(NetBoxModel):
+    name = models.CharField(max_length=100)
+    protocol = models.CharField(max_length=50)
+    version = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
