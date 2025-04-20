@@ -15,5 +15,7 @@ urlpatterns = [
     path('', include(router.urls)),
     path('services/', views.ServiceListView.as_view(), name='service_list'),
     path('services/<int:pk>/', views.ServiceDetailView.as_view(), name='service_detail'),
+    path('azure-subnets/', views.AzureSubnetListView.as_view(), name='azuresubnet_list'),
+    path('azure-subnets/<int:pk>/', views.AzureSubnetDetailView.as_view(), name='azuresubnet_detail'),
 ]
 
