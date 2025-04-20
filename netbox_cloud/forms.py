@@ -73,27 +73,6 @@ class ApplicationForm(NetBoxModelForm):
             "vm",
         ]
 
-class ICForm(NetBoxModelForm):
-
-    device = DynamicModelChoiceField(
-        queryset=Device.objects.all(),
-        required=False,
-    )
-    virtual_machine = DynamicModelChoiceField(
-        queryset=VirtualMachine.objects.all(),
-        required=False,
-    )
-
-    application = DynamicModelChoiceField(
-        queryset=models.Application.objects.all(),
-        required=False,
-    )
-
-    class Meta:
-        model = models.IC
-        fields = [
-            'service',
-        ]
 
 
 class PenTestForm(NetBoxModelForm):
