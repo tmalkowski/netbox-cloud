@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <h5 class="card-header">Azure Resource Groups</h5>
+            <div class="card-body">
+                {% render_table table %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

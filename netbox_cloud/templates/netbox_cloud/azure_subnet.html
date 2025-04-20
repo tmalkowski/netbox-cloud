@@ -1,0 +1,32 @@
+{% extends 'generic/object.html' %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+<div class="row mb-3">
+    <div class="col-md-6">
+        <div class="card">
+            <h5 class="card-header">Azure Subnet</h5>
+            <div class="card-body">
+                <table class="table table-hover">
+                    <tr>
+                        <td>Name</td>
+                        <td>{{ object.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Azure ID</td>
+                        <td>{{ object.azure_id }}</td>
+                    </tr>
+                    <tr>
+                        <td>Virtual Network</td>
+                        <td>{{ object.virtual_network }}</td>
+                    </tr>
+                    <tr>
+                        <td>Prefix</td>
+                        <td>{{ object.prefix }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
