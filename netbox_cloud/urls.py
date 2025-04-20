@@ -13,5 +13,7 @@ router.register(r'azure-subnets', views.AzureSubnetViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('services/', views.ServiceListView.as_view(), name='service_list'),
+    path('services/<int:pk>/', views.ServiceDetailView.as_view(), name='service_detail'),
 ]
 

@@ -31,9 +31,12 @@ class AzureVirtualNetwork(AzureResourceBase):
     def get_absolute_url(self):
         return reverse("plugins:netbox_cloud:azurevirtualnetwork", kwargs={"pk": self.pk})
 
-class AzureSubnet(AzureResourceBase):
-    virtual_network = models.ForeignKey(AzureVirtualNetwork, on_delete=models.CASCADE, related_name="subnets")
-    prefix = models.CharField("Prefix", max_length=100)
+class Service(NetBoxModel):
+    name = models.CharField("Name", max_length=100)
+    description = models.TextField("Description", blank=True, null=True)
+
+    def __str__(self):
+        return self.name
 
     def get_absolute_url(self):
-        return reverse("plugins:netbox_cloud:azuresubnet", kwargs={"pk": self.pk})
+        return reverse("plugins:netbox_cloud:service", kwargs={"pk": self.pk})
