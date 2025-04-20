@@ -4,6 +4,7 @@ from . import models
 from . import filtersets
 from . import forms
 from . import tables
+from . import serializers
 
 class AzureSubscriptionListView(generic.ObjectListView):
     queryset = models.AzureSubscription.objects.all()
