@@ -94,33 +94,13 @@ class PenTestForm(NetBoxModelForm):
 
 class RelationForm(NetBoxModelForm):
 
-    source = DynamicModelChoiceField(
-        queryset=models.IC.objects.all(),
-        required=True,
-        label='Source',
-        query_params={
-            'service_id': '$service',
-        },
-    )
-
-    destination = DynamicModelChoiceField(
-        queryset=models.IC.objects.all(),
-        required=True,
-        label='Destination',
-        query_params={
-            'service_id': '$service',
-        },
-    )
-
     link_text = forms.CharField(required=False)
 
     class Meta:
         model = models.Relation
         fields = [
             'service',
-            'source',
             'source_shape',
-            'destination',
             'destination_shape',
             "connector_shape",
             "link_text",
