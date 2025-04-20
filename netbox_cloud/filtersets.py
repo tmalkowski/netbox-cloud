@@ -30,12 +30,3 @@ class AzureSubnetFilterSet(NetBoxModelFilterSet):
 
 
 
-class RelationFilter(NetBoxModelFilterSet):
-
-    class Meta:
-        model = models.Relation
-
-        fields = [
-            "id",
-            "service",
-        ]
