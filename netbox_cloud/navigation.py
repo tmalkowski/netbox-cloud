@@ -1,28 +1,30 @@
-from netbox.plugins import PluginMenu, PluginMenuButton, PluginMenuItem
+from netbox.plugins import PluginMenu, PluginMenuItem
 
-
-from django.conf import settings
-
-plugin_settings = settings.PLUGINS_CONFIG["netbox_cloud"]
-
-menu_buttons = (
+menu_items = (
     PluginMenuItem(
-        permissions=["netbox_cloud.view_service"],
-        link="plugins:netbox_cloud:service_list",
-        link_text="Services",
+        link='plugins:netbox_cloud:azuresubscription_list',
+        link_text='Azure Subscriptions',
+        permissions=['netbox_cloud.view_azuresubscription']
     ),
     PluginMenuItem(
-        permissions=["netbox_cloud.view_application"],
-        link="plugins:netbox_cloud:application_list",
-        link_text="Applications",
+        link='plugins:netbox_cloud:azureresourcegroup_list',
+        link_text='Azure Resource Groups',
+        permissions=['netbox_cloud.view_azureresourcegroup']
+    ),
+    PluginMenuItem(
+        link='plugins:netbox_cloud:azurevirtualnetwork_list',
+        link_text='Azure Virtual Networks',
+        permissions=['netbox_cloud.view_azurevirtualnetwork']
+    ),
+    PluginMenuItem(
+        link='plugins:netbox_cloud:azuresubnet_list',
+        link_text='Azure Subnets',
+        permissions=['netbox_cloud.view_azuresubnet']
     ),
 )
 
-if plugin_settings.get("top_level_menu"):
-    menu = PluginMenu(
-        label="Service Management",
-        groups=(("Services", menu_buttons),),
-        icon_class="mdi mdi-cog-outline",
-    )
-else:
-    menu_items = menu_buttons
+menu = PluginMenu(
+    label='Azure Resources',
+    groups=(('Azure Resources', menu_items),),
+    icon_class='mdi mdi-cloud-outline',
+)

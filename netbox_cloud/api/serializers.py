@@ -14,7 +14,6 @@ from virtualization.api.serializers import VirtualMachineSerializer
 from netbox.api.serializers import NetBoxModelSerializer
 
 from netbox_cloud import models
-from netbox_cloud import choices
 
 
 class ApplicationSerializer(NetBoxModelSerializer):
@@ -191,3 +190,22 @@ class PenTestSerializer(serializers.Serializer):
             "ticket",
             "report_link"
         ]
+class AzureSubscriptionSerializer(NetBoxModelSerializer):
+    class Meta:
+        model = models.AzureSubscription
+        fields = ['id', 'name', 'azure_id', 'managed_by']
+
+class AzureResourceGroupSerializer(NetBoxModelSerializer):
+    class Meta:
+        model = models.AzureResourceGroup
+        fields = ['id', 'name', 'azure_id', 'location']
+
+class AzureVirtualNetworkSerializer(NetBoxModelSerializer):
+    class Meta:
+        model = models.AzureVirtualNetwork
+        fields = ['id', 'name', 'azure_id', 'resource_group', 'location']
+
+class AzureSubnetSerializer(NetBoxModelSerializer):
+    class Meta:
+        model = models.AzureSubnet
+        fields = ['id', 'name', 'azure_id', 'virtual_network', 'prefix']

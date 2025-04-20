@@ -1,27 +1,20 @@
 from netbox.api.viewsets import NetBoxModelViewSet
 
 from netbox_cloud import models
-from netbox_cloud import filtersets
 from . import serializers
 
-class ICViewSet(NetBoxModelViewSet):
-    queryset = models.IC.objects.all()
-    serializer_class = serializers.ICSerializer
-    filterset_class = filtersets.ICFilter
+class AzureSubscriptionViewSet(NetBoxModelViewSet):
+    queryset = models.AzureSubscription.objects.all()
+    serializer_class = serializers.AzureSubscriptionSerializer
 
+class AzureResourceGroupViewSet(NetBoxModelViewSet):
+    queryset = models.AzureResourceGroup.objects.all()
+    serializer_class = serializers.AzureResourceGroupSerializer
 
-class ServiceViewSet(NetBoxModelViewSet):
-    queryset = models.Service.objects.all()
-    serializer_class = serializers.ServiceSerializer
+class AzureVirtualNetworkViewSet(NetBoxModelViewSet):
+    queryset = models.AzureVirtualNetwork.objects.all()
+    serializer_class = serializers.AzureVirtualNetworkSerializer
 
-class ApplicationViewSet(NetBoxModelViewSet):
-    queryset = models.Application.objects.all()
-    serializer_class = serializers.ApplicationSerializer
-
-class RelationViewSet(NetBoxModelViewSet):
-    queryset = models.Relation.objects.all()
-    serializer_class = serializers.RelationSerializer
-
-class PenTestViewSet(NetBoxModelViewSet):
-    queryset = models.PenTest.objects.all()
-    serializer_class = serializers.PenTestSerializer
+class AzureSubnetViewSet(NetBoxModelViewSet):
+    queryset = models.AzureSubnet.objects.all()
+    serializer_class = serializers.AzureSubnetSerializer
