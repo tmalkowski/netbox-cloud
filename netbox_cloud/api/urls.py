@@ -3,11 +3,10 @@ from . import views
 
 router = NetBoxRouter()
 
-router.register('ic', views.ICViewSet)
-router.register('service', views.ServiceViewSet)
-router.register('application', views.ApplicationViewSet)
-router.register('relation', views.RelationViewSet)
-router.register('pentest', views.PenTestViewSet)
+router.register('azure-subscriptions', views.AzureSubscriptionViewSet)
+router.register('azure-resource-groups', views.AzureResourceGroupViewSet)
+router.register('azure-virtual-networks', views.AzureVirtualNetworkViewSet)
+router.register('azure-subnets', views.AzureSubnetViewSet)
 
 urlpatterns = router.urls
 app_name = 'netbox_cloud-api'
