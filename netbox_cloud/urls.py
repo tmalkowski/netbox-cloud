@@ -6,7 +6,7 @@ from . import views
 app_name = 'netbox_cloud'
 
 router = DefaultRouter()
-router.register(r'azure-subscriptions', views.AzureSubscriptionViewSet)
+router.register(r'azure-subscriptions', views.AzureSubscriptionView)
 router.register(r'azure-resource-groups', views.AzureResourceGroupViewSet)
 router.register(r'azure-virtual-networks', views.AzureVirtualNetworkViewSet)
 router.register(r'azure-subnets', views.AzureSubnetViewSet)
