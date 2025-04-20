@@ -87,19 +87,6 @@ class VulnTable(NetBoxTable):
             "status",
         )
 
-class ApplicationTable(NetBoxTable):
-
-    name = tables.LinkColumn(verbose_name="Application")
-    id = ToggleColumn()
-
-    class Meta(NetBoxTable.Meta):
-        model = models.Application
-        fields = [
-            "name",
-            "version",
-            "protocol",
-            "ports",
-         ]
         
 class RelationTable(NetBoxTable):
     id = ToggleColumn()

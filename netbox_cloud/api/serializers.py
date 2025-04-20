@@ -17,56 +17,6 @@ from netbox.api.serializers import NetBoxModelSerializer
 from netbox_cloud import models
 
 
-class ApplicationSerializer(NetBoxModelSerializer):
-    id = serializers.IntegerField(read_only=True)
-    name = serializers.CharField()
-    display = serializers.SerializerMethodField("get_display")
-    protocol = ChoiceField(choices=ServiceProtocolChoices, required=False)
-    version = serializers.CharField()
-    devices = DeviceSerializer(many=True, required=False, allow_null=True, nested=True)
-    vm = VirtualMachineSerializer(many=True, required=False, allow_null=True, nested=True)
-
-    def get_display(self, obj):
-        return f"{obj}"
-
-    class Meta:
-        model = models.Application
-        fields = [
-            "id",
-            "display",
-            "name",
-            "protocol",
-            "ports",
-            "version",
-            "devices",
-            "vm",
-        ]
-
-    def create(self, validated_data):
-        devices = validated_data.pop("devices", None)
-        virtual_machines = validated_data.pop("vm", None)
-
-        application = super().create(validated_data)
-
-        if devices is not None:
-            application.devices.set(devices)
-        if virtual_machines is not None:
-            application.vm.set(virtual_machines)
-
-        return application
-
-    def update(self, instance, validated_data):
-        devices = validated_data.pop("devices", None)
-        virtual_machines = validated_data.pop("vm", None)
-
-        application = super().update(instance, validated_data)
-
-        if devices is not None:
-            application.devices.set(devices)
-        if virtual_machines is not None:
-            application.vm.set(virtual_machines)
-
-        return application
 
 
 class ICSerializer(serializers.Serializer):

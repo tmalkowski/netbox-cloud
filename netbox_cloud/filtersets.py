@@ -100,64 +100,6 @@ class ServiceFilterSet(NetBoxModelFilterSet):
             "backup_profile",
         ]
 
-class ApplicationFilterSet(NetBoxModelFilterSet):
-
-    q = django_filters.CharFilter(
-        method="search",
-        label="Search",
-    )
-
-    devices = django_filters.ModelMultipleChoiceFilter(
-        field_name="devices__name",
-        queryset=Device.objects.all(),
-        to_field_name="name",
-    )
-    devices_id = django_filters.ModelMultipleChoiceFilter(
-        field_name="devices__id",
-        queryset=Device.objects.all(),
-        to_field_name="id",
-    )
-
-    virtual_machines = django_filters.ModelMultipleChoiceFilter(
-        field_name="vm__name",
-        queryset=VirtualMachine.objects.all(),
-        to_field_name="name",
-    )
-    virtual_machines_id = django_filters.ModelMultipleChoiceFilter(
-        field_name="vm__id",
-        queryset=VirtualMachine.objects.all(),
-        to_field_name="id",
-    )
-
-    ports = django_filters.NumberFilter(
-        field_name="ports",
-        lookup_expr="contains",
-    )
-
-    def search(self, queryset, name, value):
-
-        if not value.strip():
-            return queryset
-
-        qs_filter = (
-            Q(name__icontains=value) |
-            Q(devices__name__icontains=value) |
-            Q(vm__name__icontains=value)
-        )
-
-        return queryset.filter(qs_filter).distinct()
-
-    class Meta:
-        model = models.Application
-
-        fields = [
-            "id",
-            "name",
-            "protocol",
-            "version",
-            "devices",
-            "virtual_machines",
-        ]
 
 class RelationFilter(NetBoxModelFilterSet):
 

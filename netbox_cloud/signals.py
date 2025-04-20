@@ -17,4 +17,3 @@ def handle_IC_assigned_Object_delete(sender,instance,*args,**kwargs):
 
 device_delete = receiver(post_delete, sender=Device)(handle_IC_assigned_Object_delete)
 vm_delete = receiver(post_delete, sender=VirtualMachine)(handle_IC_assigned_Object_delete)
-app_delete = receiver(post_delete, sender=models.Application)(handle_IC_assigned_Object_delete)
