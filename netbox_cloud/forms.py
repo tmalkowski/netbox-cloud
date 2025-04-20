@@ -3,8 +3,6 @@ from django import forms
 from dcim.models import Device
 from circuits.models import Circuit, Provider
 from tenancy.models import Tenant
-from ipam.models import Service
-from ipam.choices import ServiceProtocolChoices
 from ipam.constants import SERVICE_PORT_MIN, SERVICE_PORT_MAX
 from virtualization.models import VirtualMachine
 from utilities.forms.fields import (

@@ -47,19 +47,6 @@ class AzureSubnetTable(NetBoxTable):
         fields = ('name', 'azure_id', 'virtual_network', 'prefix')
 
 
-class ServiceTable(NetBoxTable):
-
-    name = tables.LinkColumn(verbose_name="Service")
-    id = ToggleColumn()
-    backup_profile = tables.Column(verbose_name="Backup Profile")
-
-    
-    class Meta(NetBoxTable.Meta):
-        model = models.Service
-        fields = (
-            "name",
-            "backup_profile",
-        )
 
 class ICTable(NetBoxTable):
     id = ToggleColumn()

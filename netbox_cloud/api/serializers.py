@@ -8,7 +8,6 @@ from netbox_cloud import choices
 from utilities.api import get_serializer_for_model
 from tenancy.api.serializers import TenantSerializer
 
-from ipam.choices import ServiceProtocolChoices
 from dcim.api.serializers import DeviceSerializer
 from virtualization.api.serializers import VirtualMachineSerializer
 
@@ -63,40 +62,6 @@ class ICSerializer(serializers.Serializer):
         ]
 
 
-class ServiceSerializer(NetBoxModelSerializer):
-
-    name = serializers.CharField()
-    display = serializers.SerializerMethodField("get_display")
-    clients = TenantSerializer(many=True, required=False, allow_null=True, nested=True)
-    comments = serializers.CharField()
-    backup_profile = serializers.CharField(required=False)
-
-    def get_display(self, obj):
-        return obj.name
-
-    def create(self, validated_data):
-        clients = validated_data.pop("clients", None)
-
-        service = super().create(validated_data)
-
-        if clients is not None:
-            service.clients.set(clients)
-
-        return service
-
-    def update(self, instance, validated_data):
-        clients = validated_data.pop("clients", None)
-
-        service = super().update(instance, validated_data)
-
-        if clients is not None:
-            service.clients.set(clients)
-
-        return service
-
-    class Meta:
-        model = models.Service
-        fields = ["id", "display", "name", "clients", "comments", "backup_profile"]
 
 
 class RelationSerializer(serializers.Serializer):
