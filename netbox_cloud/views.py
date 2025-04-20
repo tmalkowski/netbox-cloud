@@ -1,3 +1,4 @@
+from netbox.views import generic
 from . import models
 from . import filtersets
 from . import forms
