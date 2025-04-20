@@ -55,3 +55,13 @@ class Relation(NetBoxModel):
 
     def __str__(self):
         return f"{self.service} - {self.source_shape} to {self.destination_shape}"
+
+class Relation(NetBoxModel):
+    service = models.CharField(max_length=100)
+    source_shape = models.CharField(max_length=50)
+    destination_shape = models.CharField(max_length=50)
+    connector_shape = models.CharField(max_length=50)
+    link_text = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.service} - {self.source_shape} to {self.destination_shape}"
