@@ -3,6 +3,7 @@ from django.contrib.contenttypes.models import ContentType
 
 from netbox.api.fields import ChoiceField, ContentTypeField
 from netbox.api.serializers import WritableNestedSerializer
+from netbox_cloud import choices
 
 from utilities.api import get_serializer_for_model
 from tenancy.api.serializers import TenantSerializer
