@@ -34,7 +34,7 @@ class AzureResourceGroupForm(NetBoxModelForm):
 class AzureVirtualNetworkForm(NetBoxModelForm):
     class Meta:
         model = models.AzureVirtualNetwork
-        fields = ['name', 'azure_id', 'comments', 'resource_group', 'location']
+        fields = ['name', 'azure_id', 'comments', 'resource_group', 'prefix', 'location']
 
 class AzureSubnetForm(NetBoxModelForm):
     class Meta:

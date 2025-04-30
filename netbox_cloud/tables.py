@@ -32,11 +32,12 @@ class AzureVirtualNetworkTable(NetBoxTable):
     azure_id = tables.Column()
     comments = tables.Column()
     resource_group = tables.Column()
+    prefix = tables.Column()
     location = tables.Column()
 
     class Meta(NetBoxTable.Meta):
         model = models.AzureVirtualNetwork
-        fields = ('name', 'azure_id', 'comments', 'resource_group', 'location')
+        fields = ('name', 'azure_id', 'comments', 'resource_group', 'location', 'prefix')
 
 
 class AzureSubnetTable(NetBoxTable):
