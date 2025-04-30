@@ -3,7 +3,7 @@ from .models import AzureSubscription, AzureResourceGroup, AzureVirtualNetwork, 
 
 @admin.register(AzureSubscription)
 class AzureSubscriptionAdmin(admin.ModelAdmin):
-    list_display = ('name', 'azure_id', 'managed_by')
+    list_display = ('name', 'azure_id', 'managed_by', 'comments')
 
 @admin.register(AzureResourceGroup)
 class AzureResourceGroupAdmin(admin.ModelAdmin):

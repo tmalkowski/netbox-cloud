@@ -1,7 +1,6 @@
 from django import forms
 
 from dcim.models import Device
-from circuits.models import Circuit, Provider
 from tenancy.models import Tenant
 from virtualization.models import VirtualMachine
 from utilities.forms.fields import (
@@ -25,22 +24,22 @@ from . import models
 class AzureSubscriptionForm(NetBoxModelForm):
     class Meta:
         model = models.AzureSubscription
-        fields = ['name', 'azure_id', 'managed_by']
+        fields = ['name', 'azure_id', 'comments', 'managed_by']
 
 class AzureResourceGroupForm(NetBoxModelForm):
     class Meta:
         model = models.AzureResourceGroup
-        fields = ['name', 'azure_id', 'location']
+        fields = ['name', 'azure_id', 'comments', 'location']
 
 class AzureVirtualNetworkForm(NetBoxModelForm):
     class Meta:
         model = models.AzureVirtualNetwork
-        fields = ['name', 'azure_id', 'resource_group', 'location']
+        fields = ['name', 'azure_id', 'comments', 'resource_group', 'location']
 
 class AzureSubnetForm(NetBoxModelForm):
     class Meta:
         model = models.AzureSubnet
-        fields = ['name', 'azure_id', 'virtual_network', 'prefix']
+        fields = ['name', 'azure_id', 'comments', 'virtual_network', 'prefix']
 
 
 

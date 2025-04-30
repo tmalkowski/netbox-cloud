@@ -16,7 +16,6 @@ class NetboxCloudPluginConfig(PluginConfig):
     }
 
     def ready(self):
-        from . import signals
         super().ready()
 
 
